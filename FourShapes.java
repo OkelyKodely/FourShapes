@@ -17,7 +17,6 @@ public class FourShapes implements KeyListener {
     Move move;
     Shape L = new Shape();
     Shape Pyramid = new Shape();
-    Shape Block = new Shape();
     Shape S1 = new Shape();
     Shape S2 = new Shape();
     public void rotate() {
@@ -63,32 +62,32 @@ public class FourShapes implements KeyListener {
                 S1.pts.point12 += 2;
                 S1.pts.point21 -= 1;
                 S1.pts.point22 += 1;
-                S1.pts.point41 -= 1;
-                S1.pts.point42 -= 1;
+                S1.pts.point41 += 1;
+                S1.pts.point42 += 1;
             } else if(S1.direction.equals("left")) { //from here suckors.. DOt.PEriOD
                 S1.direction = "down";
-                S1.pts.point11 += 3;
-                S1.pts.point12 += 3;
-                S1.pts.point21 += 2;
-                S1.pts.point22 += 2;
-                S1.pts.point31 += 1;
-                S1.pts.point32 += 1;
+                S1.pts.point11 += 2;
+                S1.pts.point12 += 2;
+                S1.pts.point21 += 1;
+                S1.pts.point22 += 1;
+                S1.pts.point41 += 1;
+                S1.pts.point42 -= 1;
             } else if(S1.direction.equals("down")) {
                 S1.direction = "right";
-                S1.pts.point11 += 3;
-                S1.pts.point12 -= 3;
-                S1.pts.point21 += 2;
-                S1.pts.point22 -= 2;
-                S1.pts.point31 += 1;
-                S1.pts.point32 -= 1;
+                S1.pts.point11 += 2;
+                S1.pts.point12 -= 2;
+                S1.pts.point21 += 1;
+                S1.pts.point22 -= 1;
+                S1.pts.point41 -= 1;
+                S1.pts.point42 -= 1;
             } else if(S1.direction.equals("right")) {
                 S1.direction = "up";
-                S1.pts.point11 -= 3;
-                S1.pts.point12 -= 3;
-                S1.pts.point21 -= 2;
-                S1.pts.point22 -= 2;
-                S1.pts.point31 -= 1;
-                S1.pts.point32 -= 1;
+                S1.pts.point11 -= 2;
+                S1.pts.point12 -= 2;
+                S1.pts.point21 -= 1;
+                S1.pts.point22 -= 1;
+                S1.pts.point41 -= 1;
+                S1.pts.point42 += 1;
             }
         }
         if(currentShape.equals("S2")) {
@@ -126,6 +125,41 @@ public class FourShapes implements KeyListener {
                 S2.pts.point32 -= 1;
             }
         }
+        if(currentShape.equals("Pyramid")) {
+            if(Pyramid.direction.equals("up")) {
+                Pyramid.direction = "left";
+                Pyramid.pts.point11 -= 1;
+                Pyramid.pts.point12 += 1;
+                Pyramid.pts.point21 += 1;
+                Pyramid.pts.point22 += 1;
+                Pyramid.pts.point41 -= 1;
+                Pyramid.pts.point42 -= 1;
+            } else if(Pyramid.direction.equals("left")) {
+                Pyramid.direction = "down";
+                Pyramid.pts.point11 += 1;
+                Pyramid.pts.point12 += 1;
+                Pyramid.pts.point21 += 1;
+                Pyramid.pts.point22 -= 1;
+                Pyramid.pts.point41 -= 1;
+                Pyramid.pts.point42 += 1;
+            } else if(Pyramid.direction.equals("down")) {
+                Pyramid.direction = "right";
+                Pyramid.pts.point11 += 1;
+                Pyramid.pts.point12 -= 1;
+                Pyramid.pts.point21 -= 1;
+                Pyramid.pts.point22 -= 1;
+                Pyramid.pts.point41 += 1;
+                Pyramid.pts.point42 += 1;
+            } else if(Pyramid.direction.equals("right")) {
+                Pyramid.direction = "up";
+                Pyramid.pts.point11 -= 1;
+                Pyramid.pts.point12 -= 1;
+                Pyramid.pts.point21 -= 1;
+                Pyramid.pts.point22 += 1;
+                Pyramid.pts.point41 += 1;
+                Pyramid.pts.point42 -= 1;
+            }
+        }
     }
     @Override
     public void keyPressed(KeyEvent e) {
@@ -139,11 +173,6 @@ public class FourShapes implements KeyListener {
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
             if (currentShape.equals("L")) {
                 L.moveDown();
-                for (int i = 0; i < 80; i++) {
-                    for (int j = 0; j < 40; j++) {
-                        brd[i][j] = false;
-                    }
-                }
                 try {
                     brd[L.pts.point12][L.pts.point11] = true;
                     brd[L.pts.point22][L.pts.point21] = true;
@@ -152,11 +181,6 @@ public class FourShapes implements KeyListener {
                 } catch (Exception event){}                
             } else if (currentShape.equals("S2")) {
                 S2.moveDown();
-                for (int i = 0; i < 80; i++) {
-                    for (int j = 0; j < 40; j++) {
-                        brd[i][j] = false;
-                    }
-                }
                 try {
                     brd[S2.pts.point12][S2.pts.point11] = true;
                     brd[S2.pts.point22][S2.pts.point21] = true;
@@ -165,11 +189,6 @@ public class FourShapes implements KeyListener {
                 } catch (Exception event){}
             } else if (currentShape.equals("S1")) {
                 S1.moveDown();
-                for (int i = 0; i < 80; i++) {
-                    for (int j = 0; j < 40; j++) {
-                        brd[i][j] = false;
-                    }
-                }
                 try {
                     brd[S1.pts.point12][S1.pts.point11] = true;
                     brd[S1.pts.point22][S1.pts.point21] = true;
@@ -178,11 +197,6 @@ public class FourShapes implements KeyListener {
                 } catch (Exception event){}
             } else if (currentShape.equals("Pyramid")) {
                 Pyramid.moveDown();
-                for (int i = 0; i < 80; i++) {
-                    for (int j = 0; j < 40; j++) {
-                        brd[i][j] = false;
-                    }
-                }
                 try {
                     brd[Pyramid.pts.point12][Pyramid.pts.point11] = true;
                     brd[Pyramid.pts.point22][Pyramid.pts.point21] = true;
@@ -206,16 +220,16 @@ public class FourShapes implements KeyListener {
                     brd[i][j] = false;
                 }
             }
+            this.pts.point12++;
+            this.pts.point22++;
+            this.pts.point32++;
+            this.pts.point42++;
             try {
                 brd[this.pts.point12][this.pts.point11] = true;
                 brd[this.pts.point22][this.pts.point21] = true;
                 brd[this.pts.point32][this.pts.point31] = true;
                 brd[this.pts.point42][this.pts.point41] = true;
             } catch (Exception e){}
-            this.pts.point12++;
-            this.pts.point22++;
-            this.pts.point32++;
-            this.pts.point42++;
         }
     }
     public FourShapes() {
@@ -263,6 +277,8 @@ public class FourShapes implements KeyListener {
     }
     void runGame() throws Exception {
         currentShape = "L";
+        L.x = 5;
+        L.y = 0;
         L.pts.point11 = L.x;
         L.pts.point12 = L.y;
         L.pts.point21 = L.x;
@@ -271,6 +287,17 @@ public class FourShapes implements KeyListener {
         L.pts.point32 = L.y+2;
         L.pts.point41 = L.x;
         L.pts.point42 = L.y+3;
+        currentShape = "S1";
+        S1.x = 5;
+        S1.y = 0;
+        S1.pts.point11 = S1.x+1;
+        S1.pts.point12 = S1.y;
+        S1.pts.point21 = S1.x+1;
+        S1.pts.point22 = S1.y+1;
+        S1.pts.point31 = S1.x+1;
+        S1.pts.point32 = S1.y+2;
+        S1.pts.point41 = S1.x;
+        S1.pts.point42 = S1.y+2;
         Random random = new Random();
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -299,7 +326,7 @@ public class FourShapes implements KeyListener {
                                 L.pts.point32 = L.y+2;
                                 L.pts.point41 = L.x;
                                 L.pts.point42 = L.y+3;
-                                Block.x = -1000;
+                                
                                 S1.x = -1000;
                                 S2.x = -1000;
                                 Pyramid.x = -1000;
@@ -311,12 +338,12 @@ public class FourShapes implements KeyListener {
                                 S1.pts.point12 = S1.y;
                                 S1.pts.point21 = S1.x+1;
                                 S1.pts.point22 = S1.y+1;
-                                S1.pts.point31 = S1.x+2;
+                                S1.pts.point31 = S1.x+1;
                                 S1.pts.point32 = S1.y+2;
                                 S1.pts.point41 = S1.x;
                                 S1.pts.point42 = S1.y+2;
                                 L.x = -1000;
-                                Block.x = -1000;
+                                
                                 S2.x = -1000;
                                 Pyramid.x = -1000;
                             } else if(selectionShape == 2) {
@@ -332,15 +359,15 @@ public class FourShapes implements KeyListener {
                                 S2.pts.point41 = S2.x+1;
                                 S2.pts.point42 = S2.y+2;
                                 L.x = -1000;
-                                Block.x = -1000;
+                                
                                 S1.x = -1000;
                                 Pyramid.x = -1000;
                             } else if(selectionShape == 3) {
                                 currentShape = "Pyramid";
                                 Pyramid.x = 5;
                                 Pyramid.y = 0;
-                                Pyramid.pts.point11 = Pyramid.x;
-                                Pyramid.pts.point12 = Pyramid.y+1;
+                                Pyramid.pts.point11 = Pyramid.x+1;
+                                Pyramid.pts.point12 = Pyramid.y;
                                 Pyramid.pts.point21 = Pyramid.x;
                                 Pyramid.pts.point22 = Pyramid.y+1;
                                 Pyramid.pts.point31 = Pyramid.x+1;
@@ -348,7 +375,7 @@ public class FourShapes implements KeyListener {
                                 Pyramid.pts.point41 = Pyramid.x+2;
                                 Pyramid.pts.point42 = Pyramid.y+1;
                                 L.x = -1000;
-                                Block.x = -1000;
+                                
                                 S1.x = -1000;
                                 S2.x = -1000;
                             }
@@ -375,7 +402,7 @@ public class FourShapes implements KeyListener {
                                 L.pts.point32 = L.y+2;
                                 L.pts.point41 = L.x;
                                 L.pts.point42 = L.y+3;
-                                Block.x = -1000;
+                                
                                 S1.x = -1000;
                                 S2.x = -1000;
                                 Pyramid.x = -1000;
@@ -387,12 +414,12 @@ public class FourShapes implements KeyListener {
                                 S1.pts.point12 = S1.y;
                                 S1.pts.point21 = S1.x+1;
                                 S1.pts.point22 = S1.y+1;
-                                S1.pts.point31 = S1.x+2;
+                                S1.pts.point31 = S1.x+1;
                                 S1.pts.point32 = S1.y+2;
                                 S1.pts.point41 = S1.x;
                                 S1.pts.point42 = S1.y+2;
                                 L.x = -1000;
-                                Block.x = -1000;
+                                
                                 S2.x = -1000;
                                 Pyramid.x = -1000;
                             } else if(selectionShape == 2) {
@@ -408,7 +435,7 @@ public class FourShapes implements KeyListener {
                                 S2.pts.point41 = S2.x+1;
                                 S2.pts.point42 = S2.y+2;
                                 L.x = -1000;
-                                Block.x = -1000;
+                                
                                 S1.x = -1000;
                                 Pyramid.x = -1000;
                             } else if(selectionShape == 3) {
@@ -424,7 +451,7 @@ public class FourShapes implements KeyListener {
                                 Pyramid.pts.point41 = Pyramid.x+2;
                                 Pyramid.pts.point42 = Pyramid.y+1;
                                 L.x = -1000;
-                                Block.x = -1000;
+                                
                                 S1.x = -1000;
                                 S2.x = -1000;
                             }
@@ -452,7 +479,7 @@ public class FourShapes implements KeyListener {
                                 L.pts.point32 = L.y+2;
                                 L.pts.point41 = L.x;
                                 L.pts.point42 = L.y+3;
-                                Block.x = -1000;
+                                
                                 S1.x = -1000;
                                 S2.x = -1000;
                                 Pyramid.x = -1000;
@@ -464,12 +491,12 @@ public class FourShapes implements KeyListener {
                                 S1.pts.point12 = S1.y;
                                 S1.pts.point21 = S1.x+1;
                                 S1.pts.point22 = S1.y+1;
-                                S1.pts.point31 = S1.x+2;
+                                S1.pts.point31 = S1.x+1;
                                 S1.pts.point32 = S1.y+2;
                                 S1.pts.point41 = S1.x;
                                 S1.pts.point42 = S1.y+2;
                                 L.x = -1000;
-                                Block.x = -1000;
+                                
                                 S2.x = -1000;
                                 Pyramid.x = -1000;
                             } else if(selectionShape == 2) {
@@ -485,7 +512,7 @@ public class FourShapes implements KeyListener {
                                 S2.pts.point41 = S2.x+1;
                                 S2.pts.point42 = S2.y+2;
                                 L.x = -1000;
-                                Block.x = -1000;
+                                
                                 S1.x = -1000;
                                 Pyramid.x = -1000;
                             } else if(selectionShape == 3) {
@@ -501,21 +528,21 @@ public class FourShapes implements KeyListener {
                                 Pyramid.pts.point41 = Pyramid.x+2;
                                 Pyramid.pts.point42 = Pyramid.y+1;
                                 L.x = -1000;
-                                Block.x = -1000;
+                                
                                 S1.x = -1000;
                                 S2.x = -1000;
                             }
                         }
                         S2.moveDown();
                     } else if(currentShape.equals("Pyramid")) {
-                        System.out.println(Pyramid.pts.point11);
-                        System.out.println(Pyramid.pts.point12);
-                        spaces[Pyramid.pts.point12][Pyramid.pts.point11] = true;
-                        spaces[Pyramid.pts.point22][Pyramid.pts.point21] = true;
-                        spaces[Pyramid.pts.point32][Pyramid.pts.point31] = true;
-                        spaces[Pyramid.pts.point42][Pyramid.pts.point41] = true;
                         move = new Move(L, S1, S2, Pyramid, currentShape, brd);
                         if(Pyramid.y >= 15) {
+                            System.out.println(Pyramid.pts.point11);
+                            System.out.println(Pyramid.pts.point12);
+                            spaces[Pyramid.pts.point12][Pyramid.pts.point11] = true;
+                            spaces[Pyramid.pts.point22][Pyramid.pts.point21] = true;
+                            spaces[Pyramid.pts.point32][Pyramid.pts.point31] = true;
+                            spaces[Pyramid.pts.point42][Pyramid.pts.point41] = true;
                             int selectionShape = random.nextInt(4);
                             if(selectionShape == 0) {
                                 currentShape = "L";
@@ -529,7 +556,7 @@ public class FourShapes implements KeyListener {
                                 L.pts.point32 = L.y+2;
                                 L.pts.point41 = L.x;
                                 L.pts.point42 = L.y+3;
-                                Block.x = -1000;
+                                
                                 S1.x = -1000;
                                 S2.x = -1000;
                                 Pyramid.x = -1000;
@@ -541,12 +568,12 @@ public class FourShapes implements KeyListener {
                                 S1.pts.point12 = S1.y;
                                 S1.pts.point21 = S1.x+1;
                                 S1.pts.point22 = S1.y+1;
-                                S1.pts.point31 = S1.x+2;
+                                S1.pts.point31 = S1.x+1;
                                 S1.pts.point32 = S1.y+2;
                                 S1.pts.point41 = S1.x;
                                 S1.pts.point42 = S1.y+2;
                                 L.x = -1000;
-                                Block.x = -1000;
+                                
                                 S2.x = -1000;
                                 Pyramid.x = -1000;
                             } else if(selectionShape == 2) {
@@ -562,7 +589,7 @@ public class FourShapes implements KeyListener {
                                 S2.pts.point41 = S2.x+1;
                                 S2.pts.point42 = S2.y+2;
                                 L.x = -1000;
-                                Block.x = -1000;
+                                
                                 S1.x = -1000;
                                 Pyramid.x = -1000;
                             } else if(selectionShape == 3) {
@@ -578,7 +605,7 @@ public class FourShapes implements KeyListener {
                                 Pyramid.pts.point41 = Pyramid.x+2;
                                 Pyramid.pts.point42 = Pyramid.y+1;
                                 L.x = -1000;
-                                Block.x = -1000;
+                                
                                 S1.x = -1000;
                                 S2.x = -1000;
                             }
@@ -595,14 +622,18 @@ public class FourShapes implements KeyListener {
                 }
             }
         });
-        ////thread.join();
         thread.start();
     }
     void drawShape() {
-        g = p.getGraphics();
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+//        g = p.getGraphics();
+        g.setColor(Color.RED);
+        g.fillRect(0, 0, 1500, 1800);
         if(currentShape.equals("L")) {
             try {
-                g.setColor(Color.YELLOW);
+                g.setColor(Color.RED);
                 g.fillRect(0, 0, 1500, 1800);
                 g.setColor(Color.BLACK);
                 g.fillRect(L.pts.point11*40, L.pts.point12*40, 40, 40);
@@ -612,7 +643,7 @@ public class FourShapes implements KeyListener {
             } catch (Exception e) {}
         } else if(currentShape.equals("S1")) {
             try {
-                g.setColor(Color.YELLOW);
+                g.setColor(Color.CYAN);
                 g.fillRect(0, 0, 1500, 1800);
                 g.setColor(Color.BLACK);
                 g.fillRect(S1.pts.point11*40, S1.pts.point12*40, 40, 40);
@@ -622,7 +653,7 @@ public class FourShapes implements KeyListener {
             } catch (Exception e) {}
         } else if(currentShape.equals("S2")) {
             try {
-                g.setColor(Color.YELLOW);
+                g.setColor(Color.RED);
                 g.fillRect(0, 0, 1500, 1800);
                 g.setColor(Color.BLACK);
                 g.fillRect(S2.pts.point11*40, S2.pts.point12*40, 40, 40);
@@ -632,7 +663,7 @@ public class FourShapes implements KeyListener {
             } catch (Exception e) {}
         } else if(currentShape.equals("Pyramid")) {
             try {
-                g.setColor(Color.YELLOW);
+                g.setColor(Color.CYAN);
                 g.fillRect(0, 0, 1500, 1800);
                 g.setColor(Color.BLACK);
                 g.fillRect(Pyramid.pts.point11*40, Pyramid.pts.point12*40, 40, 40);
@@ -648,11 +679,14 @@ public class FourShapes implements KeyListener {
                     g.fillRect(j*40, i*40, 40, 40);
             }
         }
+            }
+        });
+        t.start();
     }
     void createGUI() {
-        j.setTitle("L rotateS ~");
+        j.setTitle("4 Shape Turn~~~~");
         j.setLayout(null);
-        j.setBounds(0, 0, 500, 800);
+        j.setBounds(0, 0, 800, 800);
         p.setBounds(j.getBounds());
         j.add(p);
         j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
